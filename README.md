@@ -306,7 +306,7 @@ Sistema basado en WebSockets.
 # 📂 Estructura del proyecto
 
 ```bash
-JARVIS-AI/
+IA-Asistir-Desarrolladores-JARVIS/
 │
 ├── backend/
 │   ├── app.py
@@ -348,7 +348,7 @@ JARVIS-AI/
 ## 1️⃣ Clonar repositorio
 
 ```bash
-git clone https://github.com/isairey/JARVIS-AI-CodeAssistant.git
+git clone https://github.com/isairey/IA-Asistir-Desarrolladores-JARVIS.git
 ```
 
 ---
@@ -356,7 +356,7 @@ git clone https://github.com/isairey/JARVIS-AI-CodeAssistant.git
 ## 2️⃣ Entrar al proyecto
 
 ```bash
-cd JARVIS-AI-CodeAssistant
+cd IA-Asistir-Desarrolladores-JARVIS
 ```
 
 ---
@@ -493,17 +493,7 @@ git push origin feature/nueva-funcionalidad
 
 ---
 
-# 👨‍💻 Créditos
 
-## Contribuidores destacados
-
-* Nikole Cardoso
-* Guilherme Guirro
-* Felipe Santos
-
-Su colaboración fue fundamental para el desarrollo y crecimiento del proyecto.
-
----
 
 # 👨‍💻 Desarrollador
 

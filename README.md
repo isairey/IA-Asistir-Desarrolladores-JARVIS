@@ -1,154 +1,540 @@
-# J.A.R.V.I.S. - AI Code Assistant
+<div align="center">
 
-J.A.R.V.I.S. is an intelligent coding assistant that leverages multiple state-of-the-art language models to help you with code generation, modifications, and technical discussions.
+<img width="220" src="https://cdn-icons-png.flaticon.com/512/2620/2620971.png" />
 
-![J.A.R.V.I.S.](<public/jarvis.png>)
+# 🤖 J.A.R.V.I.S. AI Code Assistant
 
-## Features
+### Plataforma Inteligente de Desarrollo de Software Impulsada por Inteligencia Artificial 🚀
 
-- **Integrated Terminal**:
-  - Cross-platform terminal support (Windows and Linux)
-  - Automatic workspace directory initialization
-  - Full xterm.js integration
-  - Real-time output streaming
-  - Command history support
-  - Proper directory tracking
-  - Native shell integration (cmd.exe on Windows, bash on Linux)
+<p align="center">
+  <b>J.A.R.V.I.S. AI Code Assistant</b> es una plataforma avanzada diseñada para desarrolladores que combina múltiples modelos de Inteligencia Artificial para generar código, modificar proyectos existentes, analizar archivos, gestionar espacios de trabajo y mantener conversaciones técnicas en tiempo real.
+</p>
 
-- **Multi-Model Support**: Choose between different AI models for your coding needs:
-  - DeepSeek R1
-  - DeepSeek V3
-  - Codestral
-  - Gemini 2.0 Flash Experimental
-  - Grok 2
-  - Claude 3.5 Sonnet
-  - GPT-4 Turbo
-  - GPT-4o Mini
-  - GPT-4o
-  - o1-mini
-  - o1-preview
+<p align="center">
+  <img src="https://img.shields.io/badge/Artificial%20Intelligence-CodeAssistant-blueviolet?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Flask-Backend-black?style=for-the-badge&logo=flask">
+  <img src="https://img.shields.io/badge/WebSocket-RealTime-success?style=for-the-badge">
+  <img src="https://img.shields.io/badge/MultiModel-AI-orange?style=for-the-badge">
+</p>
 
-- **File Attachment Support**:
-  - PDF files with text extraction
-  - Microsoft Word documents (.docx)
-  - Excel spreadsheets with sheet parsing
-  - Images with OCR capabilities
-  - Enhanced Markdown with GFM support
-  - All major programming languages
-  - Configuration files
-  - Text and documentation files
-  - File preview with syntax highlighting
-  - Multiple file upload support
-  - Progress indicators and file size display
-  - Type-specific icons and preview buttons
+<p align="center">
+  <a href="#-acerca-del-proyecto">Acerca</a> •
+  <a href="#-características">Características</a> •
+  <a href="#-modelos-de-ia">Modelos IA</a> •
+  <a href="#-tecnologías-utilizadas">Tecnologías</a> •
+  <a href="#-instalación">Instalación</a>
+</p>
 
-- **Real-Time Updates**:
-  - WebSocket-based notifications
-  - Instant feedback for code changes
-  - Real-time workspace updates
-  - Automatic change notifications
+</div>
 
-- **Workspace Management**:
-  - Create and manage multiple workspaces
-  - View workspace history
-  - Delete workspaces when no longer needed
-  - Rename workspaces
-  - Browse workspace file structure
+---
 
-- **Code Generation & Modification**:
-  - Generate new code based on natural language prompts
-  - Modify existing code with AI assistance
-  - Preview changes before applying them
-  - View diffs of proposed changes
+# 🌌 Acerca del proyecto
 
-- **Interactive Chat**:
-  - Discuss code and technical concepts
-  - Get explanations about existing code
-  - Context-aware responses based on workspace content
-  - Attach files for additional context
+**J.A.R.V.I.S. AI Code Assistant** es una plataforma web diseñada para asistir a desarrolladores durante todo el ciclo de desarrollo de software.
 
-## Technical Stack
+La aplicación integra múltiples modelos de Inteligencia Artificial líderes del mercado, permitiendo generar código, analizar proyectos, modificar archivos existentes, interpretar documentación técnica y colaborar en tiempo real dentro de espacios de trabajo organizados.
 
-- **Backend**:
-  - Flask web framework
-  - Flask-SocketIO for WebSocket support
-  - Eventlet for async operations
+La plataforma permite:
 
-- **Frontend**:
-  - Pure JavaScript
-  - TailwindCSS for styling
-  - CodeMirror for code editing
-  - Socket.IO client for real-time notifications
-  - PDF.js for PDF processing
-  - Mammoth.js for Word documents
-  - XLSX.js for Excel files
-  - Tesseract.js for OCR
-  - Marked and Unified.js for Markdown
+* 🤖 Generación automática de código
+* 🛠️ Modificación inteligente de proyectos
+* 💬 Chat técnico contextual
+* 📂 Gestión de Workspaces
+* 📄 Procesamiento de documentos
+* 🖼️ Análisis de imágenes mediante OCR
+* 🌐 Comunicación en tiempo real
+* 🖥️ Terminal integrada
 
-## Installation
+---
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Set up your environment variables in `.env`:
-   ```
-   DEEPSEEK_API_KEY=your_deepseek_api_key
-   CODESTRAL_API_KEY=your_codestral_api_key
-   OPENROUTER_API_KEY=your_openrouter_api_key
-   GOOGLE_API_KEY=your_google_api_key
-   GROK_API_KEY=your_grok_api_key
-   ANTHROPIC_API_KEY=your_anthropic_api_key
-   OPENAI_API_KEY=your_openai_api_key
-   ```
+# ✨ Características
 
-## Usage
+## 🤖 Asistente de Programación IA
 
-1. Start the server:
-   ```bash
-   python app.py
-   ```
-2. Open your browser and navigate to `http://localhost:5000`
-3. Create a new workspace or select an existing one
-4. Choose your preferred AI model
-5. Start coding with AI assistance!
+* Generación automática de código
+* Explicación de algoritmos
+* Corrección de errores
+* Optimización de proyectos
+* Refactorización inteligente
 
-## Model Capabilities
+---
 
-- **DeepSeek R1**: Latest DeepSeek model with enhanced code understanding and generation
-- **DeepSeek V3**: Specialized in code generation and modification
-- **Codestral**: High-performance code generation model
-- **Gemini 2.0 Pro**: Advanced code generation and natural language understanding
-- **Grok 2**: Advanced language model for code and natural language
-- **Claude 3.5 Sonnet**: Advanced reasoning and code understanding
-- **GPT-4 Turbo**: Latest GPT-4 model with improved performance and up-to-date knowledge
-- **GPT-4o Mini**: Experimental model with specialized capabilities and unique instruction handling
-- **GPT-4o**: Optimized GPT-4 variant with enhanced code understanding
-- **o1-mini**: Experimental model with specialized capabilities and unique instruction handling
-- **o1-preview**: Experimental model with specialized capabilities and unique instruction handling
+## 💬 Chat Técnico Inteligente
 
-## Contributing
+* Conversaciones contextuales
+* Explicaciones detalladas
+* Resolución de dudas
+* Asistencia en programación
+* Comprensión del proyecto completo
 
-Contributions are welcome! Please feel free to submit pull requests.
+---
 
-## Special Thanks
+## 📂 Gestión de Workspaces
 
-- **Nikole Cardoso** for her invaluable contributions and support
-- **Guilherme Guirro** for his expertise and guidance
-- **Felipe Santos** for his dedication and insights
+* Creación de espacios de trabajo
+* Historial de proyectos
+* Renombrado de Workspaces
+* Eliminación de proyectos
+* Navegación de archivos
 
-Their contributions have been instrumental in making J.A.R.V.I.S. better.
+---
 
-## Platform Compatibility
+## ⚡ Actualizaciones en Tiempo Real
 
-This application has been tested and confirmed working on:
-- Linux (native)
-- Windows Subsystem for Linux (WSL 2)
-- Windows (native, no admin privileges required)
+* Comunicación WebSocket
+* Sincronización instantánea
+* Notificaciones automáticas
+* Cambios reflejados al instante
 
-The application uses directory junctions on Windows to avoid requiring admin privileges, while maintaining symlink functionality on Unix-like systems.
+---
 
-## License
+# 🚀 Funcionalidades principales
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+## 🖥️ Terminal Integrada
+
+La plataforma incluye una terminal completamente funcional dentro del navegador.
+
+### Características
+
+* Compatible con Windows y Linux
+* Streaming en tiempo real
+* Historial de comandos
+* Integración nativa con shell
+* Control de directorios
+
+---
+
+## 📄 Gestión de Archivos
+
+Compatible con múltiples formatos.
+
+### Archivos soportados
+
+* PDF
+* DOCX
+* XLSX
+* Markdown
+* TXT
+* JSON
+* Imágenes
+* Código fuente
+
+---
+
+## 🖼️ OCR Inteligente
+
+Procesamiento de imágenes mediante reconocimiento óptico de caracteres.
+
+### Funcionalidades
+
+* Extracción de texto
+* Lectura automática
+* Interpretación de capturas
+* Conversión a texto editable
+
+---
+
+## 🔍 Vista previa avanzada
+
+* Resaltado de sintaxis
+* Previsualización de archivos
+* Comparación de cambios
+* Visualización de diferencias
+
+---
+
+# 🧠 Modelos de Inteligencia Artificial
+
+## 🚀 DeepSeek
+
+* DeepSeek R1
+* DeepSeek V3
+
+Especializados en programación avanzada y análisis de código.
+
+---
+
+## 🧩 OpenAI
+
+* GPT-4 Turbo
+* GPT-4o
+* GPT-4o Mini
+* o1-mini
+* o1-preview
+
+Ideales para generación de código, razonamiento y asistencia técnica.
+
+---
+
+## 🧠 Anthropic
+
+* Claude 3.5 Sonnet
+
+Excelente comprensión de proyectos complejos y documentación.
+
+---
+
+## 🌟 Google
+
+* Gemini 2.0 Flash Experimental
+
+Generación rápida y análisis multimodal.
+
+---
+
+## ⚡ xAI
+
+* Grok 2
+
+Modelo orientado a razonamiento y programación.
+
+---
+
+## 💻 Codestral
+
+Especializado en generación y completado de código.
+
+---
+
+# 📂 Módulos del sistema
+
+## 🤖 AI Engine
+
+Encargado de gestionar la comunicación con los diferentes modelos de IA.
+
+### Funcionalidades
+
+* Selección de modelos
+* Gestión de prompts
+* Procesamiento contextual
+* Generación de respuestas
+
+---
+
+## 📁 Workspace Manager
+
+Administración de proyectos y archivos.
+
+### Funcionalidades
+
+* Crear Workspaces
+* Gestionar archivos
+* Historial de proyectos
+* Exploración de carpetas
+
+---
+
+## 💬 Chat Module
+
+Sistema conversacional integrado.
+
+### Funcionalidades
+
+* Conversaciones técnicas
+* Análisis de código
+* Contexto persistente
+* Adjuntos de archivos
+
+---
+
+## ⚡ Real-Time Engine
+
+Sistema basado en WebSockets.
+
+### Funcionalidades
+
+* Actualizaciones instantáneas
+* Notificaciones
+* Sincronización en tiempo real
+
+---
+
+# 🛠️ Tecnologías utilizadas
+
+## ⚙️ Backend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=python,flask" />
+</p>
+
+* Python
+* Flask
+* Flask-SocketIO
+* Eventlet
+
+---
+
+## 🎨 Frontend
+
+<p>
+  <img src="https://skillicons.dev/icons?i=js,html,css" />
+</p>
+
+* JavaScript
+* TailwindCSS
+* CodeMirror
+* Socket.IO
+
+---
+
+## 📄 Procesamiento de archivos
+
+* PDF.js
+* Mammoth.js
+* XLSX.js
+* Tesseract.js
+* Marked.js
+* Unified.js
+
+---
+
+## 🧰 Herramientas
+
+<p>
+  <img src="https://skillicons.dev/icons?i=git,github,vscode" />
+</p>
+
+* Git
+* GitHub
+* VS Code
+
+---
+
+# 📂 Estructura del proyecto
+
+```bash
+JARVIS-AI/
+│
+├── backend/
+│   ├── app.py
+│   ├── services/
+│   ├── websocket/
+│   └── ai_models/
+│
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── terminal/
+│   └── workspace/
+│
+├── uploads/
+├── workspaces/
+├── public/
+├── static/
+├── templates/
+├── requirements.txt
+├── .env
+└── README.md
+```
+
+---
+
+# ⚡ Instalación
+
+## 📋 Requisitos
+
+* Python 3.10+
+* Pip
+* Navegador moderno
+* Claves API de modelos IA
+
+---
+
+# 🚀 Configuración del proyecto
+
+## 1️⃣ Clonar repositorio
+
+```bash
+git clone https://github.com/isairey/JARVIS-AI-CodeAssistant.git
+```
+
+---
+
+## 2️⃣ Entrar al proyecto
+
+```bash
+cd JARVIS-AI-CodeAssistant
+```
+
+---
+
+## 3️⃣ Instalar dependencias
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4️⃣ Configurar variables de entorno
+
+Crear archivo:
+
+```bash
+.env
+```
+
+Agregar:
+
+```env
+DEEPSEEK_API_KEY=
+CODESTRAL_API_KEY=
+OPENROUTER_API_KEY=
+GOOGLE_API_KEY=
+GROK_API_KEY=
+ANTHROPIC_API_KEY=
+OPENAI_API_KEY=
+```
+
+---
+
+## 5️⃣ Ejecutar servidor
+
+```bash
+python app.py
+```
+
+---
+
+# 🌐 Uso de la aplicación
+
+## Flujo de trabajo
+
+1. Crear Workspace
+2. Seleccionar modelo IA
+3. Adjuntar archivos opcionales
+4. Escribir solicitud
+5. Generar o modificar código
+6. Revisar cambios
+7. Aplicar modificaciones
+
+---
+
+# 📊 Funcionalidades destacadas
+
+## 💬 Chat Inteligente
+
+* Comprensión contextual
+* Conversaciones técnicas
+* Asistencia continua
+
+---
+
+## 📂 Gestión avanzada de proyectos
+
+* Historial
+* Organización
+* Navegación intuitiva
+
+---
+
+## 🖥️ Terminal integrada
+
+* Comandos nativos
+* Desarrollo completo desde navegador
+* Control total del entorno
+
+---
+
+# 🎯 Objetivos del proyecto
+
+## 🚀 Desarrollo asistido por IA
+
+* Incrementar productividad
+* Reducir tiempos de desarrollo
+* Facilitar aprendizaje
+* Mejorar calidad del código
+* Automatizar tareas repetitivas
+
+---
+
+# 🚧 Roadmap
+
+## 🔮 Próximas mejoras
+
+* 🤖 Agentes autónomos
+* 📱 Aplicación móvil
+* ☁️ Sincronización en la nube
+* 👥 Colaboración multiusuario
+* 🔥 Soporte para más modelos IA
+* 📊 Dashboard analítico
+* 🎙️ Control por voz
+
+---
+
+# 🤝 Contribuciones
+
+Las contribuciones son bienvenidas ❤️
+
+## Cómo contribuir
+
+1. Fork del proyecto
+
+```bash
+git checkout -b feature/nueva-funcionalidad
+```
+
+2. Commit
+
+```bash
+git commit -m "✨ Nueva funcionalidad"
+```
+
+3. Push
+
+```bash
+git push origin feature/nueva-funcionalidad
+```
+
+4. Crear Pull Request 🚀
+
+---
+
+# 👨‍💻 Créditos
+
+## Contribuidores destacados
+
+* Nikole Cardoso
+* Guilherme Guirro
+* Felipe Santos
+
+Su colaboración fue fundamental para el desarrollo y crecimiento del proyecto.
+
+---
+
+# 👨‍💻 Desarrollador
+
+<div align="center">
+
+## Isai Reyes — AI & Full Stack Developer
+
+Especializado en Inteligencia Artificial, Desarrollo Web, Automatización y Plataformas de Productividad 🚀
+
+</div>
+
+---
+
+# 🌟 Apoya el proyecto
+
+⭐ Dale una estrella
+
+🍴 Haz Fork
+
+📢 Comparte el proyecto
+
+🤖 Impulsa el desarrollo asistido por Inteligencia Artificial
+
+---
+
+# 📜 Licencia
+
+Proyecto Open Source bajo licencia MIT orientado al aprendizaje, productividad y desarrollo de software asistido por IA.
+
+---
+
+<div align="center">
+
+### 🤖 J.A.R.V.I.S. AI Code Assistant — El futuro del desarrollo de software impulsado por Inteligencia Artificial 🚀
+
+</div>

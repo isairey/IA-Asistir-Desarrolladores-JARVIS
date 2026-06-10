@@ -6,6 +6,8 @@
 
 ### Plataforma Inteligente de Desarrollo de Software Impulsada por Inteligencia Artificial 🚀
 
+![J.A.R.V.I.S.](<public/jarvis.png>)
+
 <p align="center">
   <b>J.A.R.V.I.S. AI Code Assistant</b> es una plataforma avanzada diseñada para desarrolladores que combina múltiples modelos de Inteligencia Artificial para generar código, modificar proyectos existentes, analizar archivos, gestionar espacios de trabajo y mantener conversaciones técnicas en tiempo real.
 </p>

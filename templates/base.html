@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>J.A.R.V.I.S.</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <!-- External CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/scroll/simplescrollbars.min.css" rel="stylesheet">
+    <!-- xterm.js CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='style.css') }}?v={{ cache_buster }}" rel="stylesheet">
+
+    <!-- File Processing Libraries -->
+    <!-- PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+    
+    <!-- Mammoth.js for DOCX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    
+    <!-- Tesseract.js for OCR -->
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.4/dist/tesseract.min.js"></script>
+    
+    <!-- XLSX.js for Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    
+    <!-- Marked for enhanced Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+    
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Common programming languages -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/markdown.min.js"></script>
+    
+    <!-- Unified.js ecosystem for advanced text processing -->
+    <script src="https://cdn.jsdelivr.net/npm/unified@11.0.4/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/remark-parse@11.0.0/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/remark-gfm@4.0.0/index.min.js"></script>
+</head>
+<body class="min-h-screen bg-[#1e1e1e]">
+    <div class="flex h-screen">
+        <!-- Left Sidebar - Workspace Panel -->
+        <div class="workspace-panel w-[549px] flex-none p-2 h-screen sticky top-0">
+            <!-- Workspace Bubble -->
+            <div class="panel flex-1 flex flex-col h-full overflow-y-auto">
+                <!-- Current Workspace -->
+                <div class="p-4 border-b border-[#3e3e42] flex-none">
+                    <div class="flex flex-col items-center mb-3">
+                        <h2 class="text-base font-bold flex items-center gap-2 mb-2">
+                            <i class="fas fa-folder text-blue-500"></i>
+                            Workspace
+                        </h2>
+                        <div class="flex gap-2">
+                            <button onclick="createWorkspace()" class="legacy-btn legacy-btn-primary legacy-btn-sm" title="Create New Workspace">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button onclick="importFolder()" class="legacy-btn legacy-btn-secondary legacy-btn-sm" title="Import Folder" id="importFolderBtn">
+                                <i class="fas fa-folder-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="currentWorkspaceInfo" class="mb-2 text-sm text-gray-400 hidden text-center">
+                        <p>Current Workspace:</p>
+                        <p id="currentWorkspaceName" class="truncate font-medium text-white"></p>
+                    </div>
+                    <div id="workspaceTree" class="file-tree max-h-[200px] overflow-y-auto"></div>
+                </div>
+
+                <!-- Workspace History -->
+                <div class="p-4 border-b border-[#3e3e42] flex-none">
+                    <div class="flex flex-col items-center">
+                        <h2 class="text-base font-bold mb-2 flex items-center gap-2">
+                            <i class="fas fa-history text-blue-500"></i>
+                            Workspace History
+                        </h2>
+                        <div id="workspaceHistory" class="space-y-2 max-h-[150px] overflow-y-auto w-full"></div>
+                    </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="p-4 flex-none">
+                    <div class="flex flex-col items-center">
+                        <h2 class="text-base font-bold mb-2 flex items-center gap-2">
+                            <i class="fas fa-robot text-blue-500"></i>
+                            AI Model
+                        </h2>
+                        <select id="modelSelect" class="w-full bg-gray-700 border border-gray-600 rounded p-2 text-sm text-center">
+                            <!-- Models will be loaded dynamically -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col p-2">
+            <!-- Logo and Title -->
+            <div class="p-6 flex flex-col items-center">
+                <img src="/logo.svg" alt="J.A.R.V.I.S. Logo" class="jarvis-logo">
+                <h1 class="logo-title bg-clip-text text-transparent">J.A.R.V.I.S.</h1>
+            </div>
+
+            <!-- Terminal Area -->
+            <div class="flex-1 flex flex-col">
+                <h2 class="text-center text-sm font-semibold text-gray-400 uppercase mb-1 flex items-center justify-center gap-2">
+                    <i class="fas fa-terminal"></i>
+                    Terminal
+                </h2>
+                <div class="flex-1 bg-[#2d2d2d] border border-[#3e3e42] rounded p-2 mb-4 overflow-hidden">
+                    <div class="relative h-full flex">
+                        <div class="flex-1 relative overflow-hidden" id="terminalContainer">
+                            <div id="terminal" class="absolute inset-0 bg-black rounded"></div>
+                        </div>
+                        <div class="flex flex-col items-center gap-1 ml-2">
+                            <button onclick="clearTerminal()" class="legacy-btn legacy-btn-secondary legacy-btn-sm flex items-center justify-center" title="Clear Terminal">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Generation Area -->
+            <div class="code-input-area p-2">
+                <h2 class="text-center text-sm font-semibold text-gray-400 uppercase mb-1 flex items-center justify-center gap-2">
+                    <i class="fas fa-code"></i>
+                    Code Generation
+                </h2>
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-2">
+                        <textarea id="promptInput" rows="1" 
+                            class="flex-1 bg-[#2d2d2d] border border-[#3e3e42] rounded p-2 text-sm resize-none text-black h-[40px]"
+                            placeholder="Describe what you want to create or modify..."></textarea>
+                        <div class="flex flex-row items-center gap-1">
+                            <label for="codeAttachment" class="legacy-btn legacy-btn-secondary legacy-btn-sm flex items-center justify-center">
+                                <i class="fas fa-paperclip"></i>
+                            </label>
+                            <button onclick="processPrompt()" class="legacy-btn legacy-btn-purple legacy-btn-sm flex items-center justify-center">
+                                <i class="fas fa-magic"></i>
+                            </button>
+                            <input type="file" id="codeAttachment" class="hidden" multiple>
+                        </div>
+                    </div>
+                    <div id="codeAttachments" class="space-y-1"></div>
+                </div>
+            </div>
+
+            <!-- Copyright Notice -->
+            <div class="text-center text-gray-400 py-2 mt-1">
+                <p>Copyright © 2024-2025 <a href="https://github.com/danilofalcao" target="_blank" class="text-blue-500 hover:text-blue-700">Danilo Falcão</a>. All Rights Reserved.</p>
+            </div>
+        </div>
+
+        <!-- Right Sidebar - Chat Panel -->
+        <div id="chatMode" class="w-[624px] flex-none flex flex-col p-2 h-screen sticky top-0">
+            <!-- Chat Bubble -->
+            <div class="panel flex-1 flex flex-col h-full">
+                <!-- Chat Header -->
+                <div class="p-2 border-b border-[#3e3e42] flex-none">
+                    <div class="flex items-center justify-between">
+                        <button onclick="clearChatHistory()" class="text-gray-400 hover:text-red-400 transition-colors" title="Clear Chat History">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        <h2 class="text-sm font-semibold text-gray-400 uppercase flex items-center gap-2">
+                            <i class="fas fa-comments"></i>
+                            Chat
+                        </h2>
+                        <div class="w-4"></div><!-- Spacer to balance the layout -->
+                    </div>
+                </div>
+                
+                <!-- Chat History -->
+                <div id="chatHistory" class="flex-1 overflow-y-auto p-2 min-h-0"></div>
+                
+                <!-- Chat Input -->
+                <div class="p-2 border-t border-[#3e3e42] flex-none">
+                    <div id="chatAttachments" class="space-y-1 mb-2"></div>
+                    <div class="flex items-center gap-2">
+                        <textarea id="chatInput" 
+                            class="flex-1 bg-[#2d2d2d] border border-[#3e3e42] rounded p-2 text-sm resize-none text-black h-[74px] overflow-y-auto"
+                            placeholder="Ask a question about your code..."></textarea>
+                        <div class="flex flex-col items-center justify-center gap-2 self-stretch">
+                            <label for="chatAttachment" class="legacy-btn legacy-btn-secondary legacy-btn-sm flex items-center justify-center">
+                                <i class="fas fa-paperclip"></i>
+                            </label>
+                            <button onclick="sendChatMessage()" class="legacy-btn legacy-btn-purple legacy-btn-sm flex items-center justify-center">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                            <input type="file" id="chatAttachment" class="hidden" multiple>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for file preview and changes approval -->
+    <div id="approvalModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 overflow-y-auto">
+        <div class="min-h-screen px-4 py-6 flex items-center justify-center">
+            <div class="bg-gray-800 rounded-lg w-full max-w-6xl modal-content flex flex-col max-h-[90vh]">
+                <div class="modal-header p-6 border-b border-gray-700">
+                    <h2 id="modalTitle" class="text-2xl font-bold text-white">Review Changes</h2>
+                </div>
+                <div id="modalBody" class="flex-1 overflow-y-auto p-6">
+                    <div id="changesPreview" class="text-gray-300"></div>
+                </div>
+                <div class="modal-footer p-6 border-t border-gray-700 bg-gray-800">
+                    <div id="modalFooter" class="flex justify-end gap-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <div class="bg-gray-800 rounded-lg p-8 flex items-center space-x-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            <span class="text-lg text-white" id="loadingText">Processing...</span>
+        </div>
+    </div>
+
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/scroll/simplescrollbars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/selection/active-line.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/meta.min.js"></script>
+    
+    <!-- Socket.IO -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+    <script>
+        // Connect to Socket.IO server with automatic reconnection
+        const socket = io({
+            reconnection: true,
+            reconnectionAttempts: Infinity,
+            reconnectionDelay: 1000,
+            reconnectionDelayMax: 5000,
+            timeout: 20000
+        });
+
+        // Log connection status
+        socket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Disconnected from WebSocket server - attempting to reconnect...');
+        });
+
+        socket.on('reconnect', (attemptNumber) => {
+            console.log('Reconnected to WebSocket server after ' + attemptNumber + ' attempts');
+        });
+
+        socket.on('reconnect_attempt', () => {
+            console.log('Attempting to reconnect to WebSocket server...');
+        });
+
+        socket.on('error', (error) => {
+            console.error('Socket.IO error:', error);
+        });
+
+        // Listen for changes applied event
+        socket.on('changes_applied', (data) => {
+            console.log('Changes applied:', data);
+            // Get the current workspace ID from the page
+            const currentWorkspaceName = document.getElementById('currentWorkspaceName').textContent;
+            
+            // Only reload if changes are for the current workspace
+            if (data.workspace_id === currentWorkspaceName) {
+                console.log('Reloading page to show changes...');
+                window.location.reload();
+            }
+        });
+    </script>
+
+    <!-- xterm.js and its addons -->
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-web-links@0.9.0/lib/xterm-addon-web-links.min.js"></script>
+</body>
+</html> 

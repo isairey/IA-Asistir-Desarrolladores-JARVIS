@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="100" cy="100" r="90" fill="#1E293B" />
+    
+    <!-- Outer Ring with Gradient -->
+    <circle cx="100" cy="100" r="85" fill="none" stroke="url(#blueGradient)" stroke-width="3">
+        <animate attributeName="stroke-dasharray" from="0 600" to="600 600" dur="2s" fill="freeze" />
+    </circle>
+    
+    <!-- Inner Hexagon -->
+    <path d="M100 40 L150 65 L150 115 L100 140 L50 115 L50 65 Z" 
+          fill="none" 
+          stroke="#60A5FA" 
+          stroke-width="2">
+        <animate attributeName="stroke-dasharray" from="0 600" to="600 600" dur="1.5s" fill="freeze" />
+    </path>
+    
+    <!-- Central Circle -->
+    <circle cx="100" cy="100" r="30" fill="#2563EB">
+        <animate attributeName="r" from="0" to="30" dur="1s" fill="freeze" />
+    </circle>
+    
+    <!-- Pulse Effect -->
+    <circle cx="100" cy="100" r="30" fill="none" stroke="#60A5FA" stroke-width="2">
+        <animate attributeName="r" from="30" to="40" dur="1.5s" repeatCount="indefinite" />
+        <animate attributeName="opacity" from="1" to="0" dur="1.5s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Text -->
+    <text x="100" y="105" 
+          font-family="Arial, sans-serif" 
+          font-size="24" 
+          fill="#FFFFFF" 
+          text-anchor="middle" 
+          font-weight="bold">
+        J
+    </text>
+    
+    <!-- Gradient Definitions -->
+    <defs>
+        <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2563EB" />
+            <stop offset="100%" style="stop-color:#60A5FA" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Code Lines -->
+    <g stroke="#60A5FA" stroke-width="2" opacity="0.5">
+        <line x1="30" y1="50" x2="60" y2="50">
+            <animate attributeName="x2" from="30" to="60" dur="1s" fill="freeze" />
+        </line>
+        <line x1="30" y1="60" x2="50" y2="60">
+            <animate attributeName="x2" from="30" to="50" dur="1s" fill="freeze" />
+        </line>
+        <line x1="140" y1="140" x2="170" y2="140">
+            <animate attributeName="x1" from="170" to="140" dur="1s" fill="freeze" />
+        </line>
+        <line x1="150" y1="150" x2="170" y2="150">
+            <animate attributeName="x1" from="170" to="150" dur="1s" fill="freeze" />
+        </line>
+    </g>
+</svg> 
